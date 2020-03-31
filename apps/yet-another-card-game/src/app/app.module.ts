@@ -4,14 +4,53 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { environment } from '../environments/environment';
-import {SocketIoModule} from 'ngx-socket-io';
+import { SocketIoModule } from 'ngx-socket-io';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatCardModule } from '@angular/material/card';
+import { LayoutModule } from '@angular/cdk/layout';
+import {FlexLayoutModule} from '@angular/flex-layout';
+import { TemplateComponent } from './template/template.component';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatMenuModule } from '@angular/material/menu';
+import { TranslocoRootModule } from './i18n/transloco-root.module'
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { DirectivesModule } from './directives/directives.module';
 
 @NgModule({
-  declarations: [AppComponent],
-  imports: [BrowserModule, HttpClientModule, SocketIoModule.forRoot({
-    url: environment.socket
-  })],
+  declarations: [AppComponent, TemplateComponent, DashboardComponent],
+  imports: [
+    BrowserModule,
+    HttpClientModule,
+    SocketIoModule.forRoot({
+      url: environment.socket
+    }),
+    BrowserAnimationsModule,
+    LayoutModule,
+    FlexLayoutModule,
+    MatCardModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatSidenavModule,
+    MatIconModule,
+    MatListModule,
+    MatGridListModule,
+    MatMenuModule,
+    TranslocoRootModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    DirectivesModule
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule {
+}

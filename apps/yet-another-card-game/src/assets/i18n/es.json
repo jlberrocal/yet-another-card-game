@@ -1,0 +1,23 @@
+{
+  "appName": "Solo Otro Juego de Cartas",
+  "dashboard": "Inicio",
+  "room": {
+    "create": "Crear Juego",
+    "join": "Unirse a un Juego",
+    "name": {
+      "label": "Nombre de la sala",
+      "placeholder": "Juguemos"
+    },
+    "capacity": {
+      "label": "Capacidad de la sala",
+      "placeholder": "4"
+    }
+  },
+  "create-room": "Crear",
+  "join-room": "Unirse",
+  "validations": {
+    "required": "Este campo es requerido",
+    "min": "El mínimo permitido es de {{min}}",
+    "max": "El máximo permitido es de {{max}}"
+  }
+}

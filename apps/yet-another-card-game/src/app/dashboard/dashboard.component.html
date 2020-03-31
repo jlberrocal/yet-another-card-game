@@ -1,0 +1,61 @@
+<div class="grid-container" *transloco="let t">
+  <h1 class="mat-h1">{{t('dashboard')}}</h1>
+  <mat-grid-list cols="2" rowHeight="300px">
+    <mat-grid-tile [colspan]="(isSmallerThanMedium | async) ? 2 : 1" rowspan="1">
+      <mat-card class="dashboard-card">
+        <mat-card-header>
+          <mat-card-title>
+            {{t('room.create')}}
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="dashboard-card-content">
+          <div>
+            <form [formGroup]="newRoom" fxLayout="column">
+              <mat-form-field appearance="outline">
+                <mat-label>{{t('room.name.label')}}</mat-label>
+                <input matInput [placeholder]="t('room.name.placeholder')" formControlName="name">
+                <mat-error *errorHandler="newRoom; key: 'name'; let error">{{error}}</mat-error>
+              </mat-form-field>
+
+              <mat-form-field appearance="outline">
+                <mat-label>{{t('room.capacity.label')}}</mat-label>
+                <input type="number" numeric matInput [placeholder]="t('room.capacity.placeholder')"
+                       formControlName="capacity">
+                <mat-error *errorHandler="newRoom; key: 'capacity'; let error">{{error}}</mat-error>
+              </mat-form-field>
+            </form>
+            <div fxLayout="column" fxLayoutAlign="end end">
+              <button mat-raised-button type="button" color="primary" [disabled]="newRoom.invalid">
+                {{t('create-room')}}
+              </button>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="(isSmallerThanMedium | async) ? 2 : 1" rowspan="1">
+      <mat-card class="dashboard-card">
+        <mat-card-header>
+          <mat-card-title>
+            {{t('room.join')}}
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="dashboard-card-content">
+          <div>
+            <mat-form-field appearance="outline" [style.width.%]="100">
+              <mat-label>{{t('room.name.label')}}</mat-label>
+              <input matInput [placeholder]="t('room.name.placeholder')" [formControl]="roomName">
+            </mat-form-field>
+
+            <div fxLayout="column" fxLayoutAlign="end end">
+              <button mat-raised-button type="button" color="primary" [disabled]="roomName.invalid">
+                {{t('join-room')}}
+              </button>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>
