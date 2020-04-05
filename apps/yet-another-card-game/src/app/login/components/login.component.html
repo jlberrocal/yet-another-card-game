@@ -1,0 +1,14 @@
+<div fxLayout="column" fxFlexFill fxLayoutAlign="center center" class="login-container">
+  <div>
+    <h2> {{'appName' | transloco }}</h2>
+  </div>
+  <mat-tab-group>
+    <mat-tab [label]="'login.tabs.login' | transloco">
+      <innoware-login-form (login)="login($event)"></innoware-login-form>
+    </mat-tab>
+
+    <mat-tab [label]="'login.tabs.register' | transloco">
+      <innoware-register-form (register)="register($event)"></innoware-register-form>
+    </mat-tab>
+  </mat-tab-group>
+</div>

@@ -1,0 +1,13 @@
+<form [formGroup]="form" fxLayout="column" (ngSubmit)="submit()">
+  <mat-form-field appearance="outline">
+    <mat-label>{{ 'room.name.label' | transloco }}</mat-label>
+    <input matInput formControlName="name" placeholder="{{ 'room.name.placeholder' | transloco }}">
+    <mat-error *transloco="let t">{{form.get('name').errors | translateError:t }}</mat-error>
+  </mat-form-field>
+
+  <div fxLayoutAlign="end end">
+    <button mat-raised-button color="primary" [disabled]="form.invalid">
+      {{ label | transloco }}
+    </button>
+  </div>
+</form>

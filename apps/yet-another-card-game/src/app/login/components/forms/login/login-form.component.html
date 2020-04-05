@@ -1,0 +1,19 @@
+<form [formGroup]="form" fxLayout="column" *transloco="let t" (ngSubmit)="submit()">
+  <mat-form-field appearance="outline">
+    <mat-label>{{ 'login.username' | transloco }}</mat-label>
+    <input matInput [placeholder]="'login.username' | transloco " formControlName="username">
+    <mat-error>{{form.get('username').errors | translateError:t }}</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>{{ 'login.password' | transloco }}</mat-label>
+    <input type="password" matInput [placeholder]="'login.password' | transloco " formControlName="password">
+    <mat-error>{{form.get('password').errors | translateError:t }}</mat-error>
+  </mat-form-field>
+
+  <div fxLayoutAlign="end end">
+    <button mat-raised-button color="primary" [disabled]="form.invalid">
+      {{ 'login.buttons.login' | transloco }}
+    </button>
+  </div>
+</form>

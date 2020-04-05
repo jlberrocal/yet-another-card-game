@@ -18,6 +18,9 @@
   "validations": {
     "required": "Este campo es requerido",
     "min": "El mínimo permitido es de {{min}}",
-    "max": "El máximo permitido es de {{max}}"
+    "max": "El máximo permitido es de {{max}}",
+    "minlength": "Se espera al menos {{requiredLength}} caractéres",
+    "maxlength": "Se espera un máximo de {{requiredLength}} caractéres",
+    "passwordMismatch": "Ambas contraseñas deben ser iguales"
   }
 }

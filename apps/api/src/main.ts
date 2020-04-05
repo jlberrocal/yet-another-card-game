@@ -6,15 +6,25 @@
 import { NestFactory } from '@nestjs/core';
 
 import { AppModule } from './app/app.module';
+import { FastifyAdapter, NestFastifyApplication } from '@nestjs/platform-fastify';
+import { ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create<NestFastifyApplication>(
+    AppModule,
+    new FastifyAdapter({
+      logger: true
+    })
+  );
   const globalPrefix = 'api';
   app.setGlobalPrefix(globalPrefix);
-  const port = +process.env.PORT || 3333;
-  await app.listen(port, () => {
-    console.log('Listening at http://localhost:' + port + '/' + globalPrefix);
+  app.useGlobalPipes(new ValidationPipe({
+    transform: true
+  }));
+  const port = +process.env.PORT || 3000;
+  await app.listen(port, '0.0.0.0', (err, address) => {
+    console.log(`Listening at ${address}/${globalPrefix}`);
   });
 }
 
-bootstrap();
+bootstrap().catch(err => console.error('bootstrap error', err));

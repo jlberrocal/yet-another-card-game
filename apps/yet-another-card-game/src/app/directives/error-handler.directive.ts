@@ -1,41 +1,39 @@
 import {
-  Directive,
-  ElementRef,
-  Input,
+  AfterViewInit,
+  ContentChild,
+  Directive, ElementRef,
+  EmbeddedViewRef,
   OnDestroy,
-  OnInit,
-  Renderer2,
-  TemplateRef, ViewChild,
+  OnInit, Renderer2,
+  TemplateRef,
+  ViewChild,
   ViewContainerRef
 } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormControl, FormControlName, NgControl } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
-import { MatError } from '@angular/material/form-field';
 import { TranslocoService } from '@ngneat/transloco';
 
 @Directive({
   // tslint:disable-next-line:directive-selector
-  selector: '[errorHandler]',
+  selector: '[errorHandler]'
 })
-export class ErrorHandlerDirective implements OnInit, OnDestroy {
-  @Input('errorHandler')
-  form: FormGroup;
-
-  @Input('errorHandlerKey')
-  key: string;
+export class ErrorHandlerDirective implements OnInit, AfterViewInit, OnDestroy {
+  @ContentChild(NgControl)
+  control: NgControl;
 
   private hasView = false;
   private subscription: Subscription;
 
-  constructor(
-    private templateRef: TemplateRef<any>,
-    private viewContainer: ViewContainerRef,
-    private transloco: TranslocoService) {
+  private readonly view: EmbeddedViewRef<any>;
+
+  constructor(private elementRef: ElementRef,
+              private renderer: Renderer2,
+              private transloco: TranslocoService) {
   }
 
   ngOnInit(): void {
-    const control = this.form.get(this.key);
+
+    /*const control = this.form.get(this.key);
     if (control) {
       this.subscription = control.statusChanges
         .pipe(
@@ -55,7 +53,15 @@ export class ErrorHandlerDirective implements OnInit, OnDestroy {
             this.hasView = false;
           }
         });
-    }
+    }*/
+  }
+
+  ngAfterViewInit(): void {
+    const errorNode = this.renderer.createElement('mat-error');
+    const content = this.renderer.createText(this.transloco.translate('validations.required'));
+    this.renderer.appendChild(errorNode, content);
+    this.renderer.appendChild(this.elementRef.nativeElement.querySelector('.mat-form-field-subscript-wrapper'), errorNode);
+
   }
 
   ngOnDestroy(): void {

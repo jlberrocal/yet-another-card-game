@@ -1,13 +1,22 @@
-import { OnGatewayConnection, SubscribeMessage, WebSocketGateway, WebSocketServer } from '@nestjs/websockets';
+import {
+  OnGatewayConnection,
+  OnGatewayInit,
+  SubscribeMessage,
+  WebSocketGateway,
+  WebSocketServer
+} from '@nestjs/websockets';
 import { Server } from 'socket.io';
 
 @WebSocketGateway()
-export class SocketsGateway implements OnGatewayConnection {
-  @WebSocketServer()
+export class SocketsGateway implements OnGatewayConnection, OnGatewayInit {
   server: Server;
 
   handleConnection(client: any, ...args): any {
     console.log('client connected');
+  }
+
+  afterInit(server: Server): any {
+    this.server = server;
   }
 
   @SubscribeMessage('message')

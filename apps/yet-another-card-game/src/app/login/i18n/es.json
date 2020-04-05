@@ -1,0 +1,14 @@
+{
+  "username": "Usuario",
+  "password": "Contraseña",
+  "name": "Nombre",
+  "repeatPassword": "Ingrese nuevamente la contraseña",
+  "tabs": {
+    "login": "Login",
+    "register": "Registro"
+  },
+  "buttons": {
+    "login": "Entrar",
+    "register": "Registrarse"
+  }
+}

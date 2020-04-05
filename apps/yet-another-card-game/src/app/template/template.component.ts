@@ -1,26 +1,15 @@
-import { ChangeDetectorRef, Component, ElementRef, ViewChild } from '@angular/core';
-import { MatToolbar } from '@angular/material/toolbar';
-import { NativeElement } from '../utils/native-element.decorator';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'innoware-template',
   templateUrl: './template.component.html',
-  styleUrls: ['./template.component.scss']
+  styleUrls: ['./template.component.css']
 })
-export class TemplateComponent {
-  @ViewChild(MatToolbar, { read: ElementRef })
-  @NativeElement(HTMLElement)
-  set toolbarRef({ offsetHeight }: HTMLElement) {
-    // allows bodyHeight to grow as much as possible
-    // 100vh full vertical viewport height
-    // Toolbar height
-    // Margins 20 px top and 20px bottom
-    this.bodyHeight = `calc(100vh - (${offsetHeight}px + 40px))`;
-    this.cdr.detectChanges();
+export class TemplateComponent implements OnInit {
+
+  constructor() { }
+
+  ngOnInit(): void {
   }
 
-  bodyHeight: string;
-
-  constructor(private cdr: ChangeDetectorRef) {
-  }
 }
