@@ -1,10 +1,11 @@
-import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn, Unique } from 'typeorm';
 import { User } from '../../models/user.entity';
 import { Positions } from '@innoware/api-interfaces';
 
 @Entity({
   name: 'games'
 })
+@Unique(['name'])
 export class Game {
   @PrimaryGeneratedColumn('uuid')
   id: string;
@@ -21,14 +22,8 @@ export class Game {
   })
   started: boolean;
 
-  @Column({
-    type: 'tinyint'
-  })
-  order: number;
-
-  constructor(name: string, order: number = 0) {
+  constructor(name: string) {
     this.name = name;
-    this.order = order;
   }
 }
 
@@ -44,4 +39,12 @@ export class Player extends User {
 
   @ManyToOne(type => Game, game => game.players)
   gameRoom: Game;
+
+  @Column({
+    type: 'tinyint'
+  })
+  order: number;
+
+  @Column()
+  clientId: string;
 }

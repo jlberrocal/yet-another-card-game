@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
-import { MazeController } from './maze.controller';
-import { SocketsModule } from '../sockets/sockets.module';
+import { MazeService } from './maze.service';
 
 @Module({
-  controllers: [MazeController],
-  imports: [SocketsModule]
+  providers: [MazeService],
+  exports: [MazeModule]
 })
-export class MazeModule {}
+export class MazeModule {
+}

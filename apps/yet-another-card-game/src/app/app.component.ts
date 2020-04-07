@@ -1,18 +1,9 @@
-import { AfterViewInit, Component } from '@angular/core';
-import { Socket } from 'ngx-socket-io';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'innoware-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements AfterViewInit {
-  constructor(private socket: Socket) {
-  }
-
-  ngAfterViewInit(): void {
-    this.socket.on('maze generation', (r) => {
-      console.log(r);
-    });
-  }
+export class AppComponent {
 }

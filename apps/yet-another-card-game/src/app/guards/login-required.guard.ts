@@ -12,7 +12,6 @@ export class LoginRequiredGuard implements CanActivate {
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
     const token = this.jwt.tokenGetter();
     const isExpired = this.jwt.isTokenExpired(token);
-    console.log('token', token);
     if (!token || isExpired) {
       this.router.navigateByUrl('/login')
         .then(() => localStorage.clear())

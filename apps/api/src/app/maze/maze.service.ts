@@ -1,42 +1,37 @@
-import { Controller, ForbiddenException, Get, Inject, Param, ParseIntPipe } from '@nestjs/common';
+import { ForbiddenException, Injectable } from '@nestjs/common';
 import { Card, CardNumbers, CardTypes, Jokers } from '@innoware/api-interfaces';
-import { Server } from 'socket.io';
-import { SocketsGateway } from '../sockets/sockets.gateway';
 
-@Controller('maze')
-export class MazeController {
-
-  constructor(private readonly gateway: SocketsGateway) {
-  }
-
-  @Get(':players')
-  generateHands(@Param('players', ParseIntPipe) players: number): ArrayLike<Card[]> {
-
-    if (players < 3) {
-      throw new ForbiddenException('must be at least 3 players');
-    } else if (players > 6) {
-      throw new ForbiddenException('must be maximum 6 players');
-    }
-
+@Injectable()
+export class MazeService {
+  *generateHands(players: string[]): IterableIterator<Promise<Card & {player: string}>> {
     const maze = this.disarray(this.generateMaze());
-    this.gateway.server.emit('maze generation', maze);
 
     let index = 0;
-    return maze.reduce((hands, card) => {
+    const hands = {};
+    while (maze.length) {
+      yield new Promise<Card&{player: string}>(resolve => setTimeout(resolve, 50)).then(() => {
+        return {
+          ...maze.pop(),
+          player: players[index]
+        }
+      });
+      index = index === players.length - 1 ? 0 : index + 1;
+    }
+    index = 0;
+    return maze.reduce((cards, card) => {
       index++;
       if (!hands[index]) {
         hands[index] = [];
       }
       hands[index].push(card);
 
-      if (index === players) {
+      if (index === players.length) {
         index = 0;
       }
 
       return hands;
-    }, { length: players });
+    }, {});
   }
-
   private generateMaze(): Card[] {
     const origins = {
       [CardTypes.JOKERS]: Object.keys(Jokers),
@@ -49,7 +44,7 @@ export class MazeController {
       prev.push(...origins[cardType].map(number => {
         return {
           type: CardTypes[cardType],
-          number
+          number: CardNumbers[number]
         };
       }));
       return prev;

@@ -2,7 +2,7 @@ import { BadRequestException, Injectable, NotFoundException } from '@nestjs/comm
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from '../models/user.entity';
 import { QueryFailedError, Repository } from 'typeorm';
-import { RegisterDto } from '@innoware/api-interfaces';
+import { RegisterDto, UserDto } from '@innoware/api-interfaces';
 import { compare, hash } from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
 
@@ -11,7 +11,7 @@ export class AuthService {
   constructor(@InjectRepository(User) private readonly repository: Repository<User>, private jwtService: JwtService) {
   }
 
-  async save(dto: RegisterDto) {
+  async save(dto: RegisterDto): Promise<UserDto> {
     const user = new User();
     user.name = dto.name;
     user.username = dto.username;
@@ -23,7 +23,7 @@ export class AuthService {
     return result;
   }
 
-  async login(username: string, pass: string) {
+  async login(username: string, pass: string): Promise<string> {
     const user = await this.repository.findOne({
       where: {
         username

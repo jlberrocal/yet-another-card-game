@@ -17,6 +17,11 @@ import { LoginRequiredGuard } from './guards/login-required.guard';
         canActivate: [LoginRequiredGuard]
       },
       {
+        path: 'game',
+        loadChildren: () => import('./game/game.module').then(m => m.GameModule),
+        canActivate: [LoginRequiredGuard]
+      },
+      {
         path: '**',
         redirectTo: 'home'
       }

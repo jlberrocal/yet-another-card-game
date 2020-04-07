@@ -11,6 +11,6 @@ export enum CardNumbers {
 	JACK = 'J',
 	QUEEN = 'Q',
 	KING = 'K',
-	AS = 'A'
+	ACE = 'A'
 }
 
