@@ -3,6 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { Socket } from 'ngx-socket-io';
 import { environment } from '../../../environments/environment';
 import { Card, CardNumbers, CardTypes } from '@innoware/api-interfaces';
+import { concatMap, delay } from 'rxjs/operators';
+import { of } from 'rxjs';
 
 @Component({
   selector: 'innoware-game-room',
@@ -23,9 +25,13 @@ export class GameRoomComponent implements OnInit {
         this.socket = new Socket({
           url: `${environment.socket}/game-${id}`
         });
-        this.socket.on('card', (resp: Card) => {
+        this.socket.on('connect', () => {
+          console.log('socket connected to server', this.socket.ioSocket.id);
+        });
+        this.socket.fromEvent('card').pipe(
+          // concatMap(c => of(c).pipe(delay(500)))
+        ).subscribe((resp: Card) => {
           this.cards.push(resp);
-          console.log(resp);
         });
       });
   }
