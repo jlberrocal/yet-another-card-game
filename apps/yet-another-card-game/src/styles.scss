@@ -1,4 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
+$number-font-size: 20px;
 
 html, body { height: 100%; margin: 0; }
 body { font-family: Roboto, "Helvetica Neue", sans-serif; }
@@ -11,3 +12,65 @@ body { font-family: Roboto, "Helvetica Neue", sans-serif; }
 .mat-tab-header {
   margin-bottom: 25px !important;
 }
+
+.innoware-card {
+  padding: 5px;
+  height: 92px;
+  width: 65px;
+
+  .mat-card-avatar {
+    height: 10px;
+    width: 10px;
+    margin: 5px;
+  }
+
+  .mat-card-header-text {
+    margin: 0;
+  }
+
+  .mat-card-footer {
+    margin: 0;
+
+    .mat-card-avatar {
+      margin: -5px 0;
+    }
+
+    span {
+      margin: -10px 5px;
+      font-size: $number-font-size;
+      font-weight: 500;
+    }
+  }
+}
+
+.header {
+  background-size: cover;
+  &-diamonds {
+    background-image: url('/assets/images/suits-views.svg#diamonds');
+  }
+
+  &-spades {
+    background-image: url('/assets/images/suits-views.svg#spades');
+  }
+
+  &-clubs {
+    background-image: url('/assets/images/suits-views.svg#clubs');
+  }
+
+  &-hearts {
+    background-image: url('/assets/images/suits-views.svg#hearts');
+  }
+}
+
+.mat-card-header .mat-card-title {
+  font-size: $number-font-size;
+}
+
+.number-spades, .number-clubs {
+  color: #000;
+}
+
+.number-hearts, .number-diamonds {
+  color: #d40000;
+}
+

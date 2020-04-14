@@ -3,12 +3,13 @@ import { ActivatedRoute } from '@angular/router';
 import { Socket } from 'ngx-socket-io';
 import { environment } from '../../../environments/environment';
 import { Card, SocketEvents, UserDto } from '@innoware/api-interfaces';
-import { BehaviorSubject, Subject, Subscription } from 'rxjs';
+import { BehaviorSubject, Observable, Subject, Subscription } from 'rxjs';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { map } from 'rxjs/operators';
+import { map, shareReplay } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ifProd } from '../../shared/rxjs-operators/if-prod';
 import { delayedConcat } from '../../shared/rxjs-operators/delayed-concat';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 
 @Component({
   selector: 'innoware-game-room',
@@ -22,12 +23,20 @@ export class GameRoomComponent implements OnInit, OnDestroy {
   private subscriptions = new Subscription();
   private socket: Socket;
   private readonly user: UserDto;
+  readonly isHandSet$: Observable<boolean>
 
   constructor(private route: ActivatedRoute,
               private jwt: JwtHelperService,
-              private snackBar: MatSnackBar) {
+              private snackBar: MatSnackBar,
+              private breakpointObserver: BreakpointObserver) {
     const token = jwt.tokenGetter();
     this.user = jwt.decodeToken(token);
+    this.isHandSet$ = this.breakpointObserver
+      .observe(Breakpoints.HandsetLandscape)
+      .pipe(
+        map(({ matches }) => matches),
+        shareReplay()
+      )
   }
 
   ngOnInit(): void {
@@ -37,6 +46,7 @@ export class GameRoomComponent implements OnInit, OnDestroy {
           this.socket = new Socket({
             url: `${environment.socket}/game-${id}`
           });
+          this.socket.on('connect_error', () => alert('failed to connect'))
           return id;
         })
       )

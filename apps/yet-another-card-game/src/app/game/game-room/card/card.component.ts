@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CardFetcherService } from './services/card-fetcher.service';
-import { CardNumbers, CardTypes } from '@innoware/api-interfaces';
+import { CardNumbers, CardTypes, Jokers } from '@innoware/api-interfaces';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -17,7 +17,7 @@ export class CardComponent implements OnInit {
   cardType: CardTypes;
 
   @Input()
-  cardNumber: CardNumbers;
+  cardNumber: CardNumbers | Jokers;
 
   @Output()
   selected = new EventEmitter<null>();

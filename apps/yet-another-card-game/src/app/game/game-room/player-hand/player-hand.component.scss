@@ -1,6 +1,13 @@
+.card {
+  position: relative;
+  &:hover:not(:active) {
+    z-index: 500;
+    top: -90px
+  }
+}
+
 .cards-list {
   border-radius: 4px;
-  overflow: hidden;
   display: flex;
   flex-direction: row;
 }

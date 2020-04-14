@@ -13,7 +13,9 @@ export class PlayerHandComponent {
   @Input()
   cards: Card[];
 
-  selections: any[];
+  selections: any[] = [];
+
+  dragging: boolean;
 
   drop(event: CdkDragDrop<string[]>) {
     moveItemInArray(this.cards, event.previousIndex, event.currentIndex);
@@ -21,5 +23,14 @@ export class PlayerHandComponent {
 
   cardSelected(card: Card) {
 
+  }
+
+  dragStart(e: any) {
+    console.log(e);
+    this.dragging = true;
+  }
+
+  dragEnded() {
+    this.dragging = false;
   }
 }

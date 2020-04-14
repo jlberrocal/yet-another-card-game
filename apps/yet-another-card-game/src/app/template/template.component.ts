@@ -16,8 +16,7 @@ export class TemplateComponent {
     // allows bodyHeight to grow as much as possible
     // 100vh full vertical viewport height
     // Toolbar height
-    // Margins 20 px top and 20px bottom
-    this.bodyHeight = `calc(100vh - (${offsetHeight}px + 40px))`;
+    this.bodyHeight = `calc(100vh - (${offsetHeight}px))`;
     this.cdr.detectChanges();
   }
 

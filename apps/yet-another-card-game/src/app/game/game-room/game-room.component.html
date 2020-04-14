@@ -1,6 +1,6 @@
 <div fxFill fxLayout="column" fxLayoutAlign="center center" class="game-room-container">
   <div fxFlex="1 0 auto" fxLayoutAlign="center center">
-    <img src="/assets/images/table.svg">
+    <img src="/assets/images/table.svg" [height]="(isHandSet$ | async) ? 200 : 400" [width]="(isHandSet$ | async) ? 250 : 500">
   </div>
   <innoware-player-hand [cards]="cards | async" fxFlex="0 0 250px" fxLayoutAlign="center center"></innoware-player-hand>
 </div>
