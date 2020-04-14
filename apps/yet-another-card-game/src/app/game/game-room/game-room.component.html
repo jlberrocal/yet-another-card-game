@@ -2,5 +2,5 @@
   <div fxFlex="1 0 auto" fxLayoutAlign="center center">
     <img src="/assets/images/table.svg">
   </div>
-  <innoware-player-hand [cards]="cards" fxFlex="0 0 250px" fxLayoutAlign="center center"></innoware-player-hand>
+  <innoware-player-hand [cards]="cards | async" fxFlex="0 0 250px" fxLayoutAlign="center center"></innoware-player-hand>
 </div>

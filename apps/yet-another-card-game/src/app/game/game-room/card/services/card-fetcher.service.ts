@@ -7,29 +7,34 @@ import * as Constants from '../constants';
 
 @Injectable()
 export class CardFetcherService {
-  readonly cache = {};
+  readonly cache = new Map<string, string>();
 
   constructor(private http: HttpClient) {
   }
 
   fetch(type: CardTypes, cardNumber: CardNumbers | Jokers): Observable<string> {
     const assetUrl = `/assets/images/card${type === CardTypes.JOKERS ? '-joker' : ''}.svg`;
-    if (this.cache[assetUrl]) {
-      console.log('using cache');
-      return of(this.cache[assetUrl]).pipe(take(1));
+
+    if (this.cache.has(assetUrl)) {
+      const svg = this.cache[assetUrl];
+      return of(
+        this.replace(svg, type, cardNumber)
+      ).pipe(take(1));
     }
     return this.http.get<string>(assetUrl, {
       responseType: 'text' as any
     }).pipe(
-      map((svg: string) => {
-        return svg
-          .replace('{{symbol}}', Constants[type.toLocaleLowerCase()])
-          .replace(/{{number}}/gi, cardNumber)
-          .replace(/{{numberColor}}/gi, this.numberColor(type, type === CardTypes.JOKERS ? cardNumber as any : null))
-          .replace('{{symbol_mini}}', Constants[type.toLocaleLowerCase() + '_mini']);
-      }),
-      tap((svg) => this.cache[assetUrl] = svg)
+      tap(svg => this.cache.set(assetUrl, svg)),
+      map((svg: string) => this.replace(svg, type, cardNumber))
     );
+  }
+
+  private replace(svg: string, type: CardTypes, cardNumber: CardNumbers | Jokers): string {
+    return svg
+      .replace(/{{symbol}}/, Constants[type.toLocaleLowerCase()])
+      .replace(/{{number}}/gi, cardNumber)
+      .replace(/{{numberColor}}/gi, this.numberColor(type, type === CardTypes.JOKERS ? cardNumber as any : null))
+      .replace(/{{symbol_mini}}/, Constants[type.toLocaleLowerCase() + '_mini']);
   }
 
   private numberColor(cardType: CardTypes, color?: Jokers) {

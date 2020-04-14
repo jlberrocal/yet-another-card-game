@@ -1,8 +1,8 @@
-<form [formGroup]="form" fxLayout="column" (ngSubmit)="submit()">
+<form [formGroup]="form" fxLayout="column" (ngSubmit)="submit()" *transloco="let t">
   <mat-form-field appearance="outline">
     <mat-label>{{ 'room.name.label' | transloco }}</mat-label>
-    <input matInput formControlName="name" placeholder="{{ 'room.name.placeholder' | transloco }}">
-    <mat-error *transloco="let t">{{form.get('name').errors | translateError:t }}</mat-error>
+    <input matInput formControlName="name" [placeholder]="'room.name.placeholder' | transloco">
+    <mat-error>{{form.get('name').errors | translateError:t }}</mat-error>
   </mat-form-field>
 
   <div fxLayoutAlign="end end">

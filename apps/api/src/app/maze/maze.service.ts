@@ -3,7 +3,7 @@ import { Card, CardNumbers, CardTypes, Jokers } from '@innoware/api-interfaces';
 
 @Injectable()
 export class MazeService {
-  * generateHands(): IterableIterator<Promise<Card>> {
+  * generateHands(): IterableIterator<Card> {
     let maze = this.generateMaze();
 
     for (let i = 0; i < 10; i++) {
@@ -11,9 +11,7 @@ export class MazeService {
     }
 
     while (maze.length) {
-      yield new Promise<Card>(resolve => setTimeout(resolve, 5)).then(() => {
-        return { ...maze.pop() };
-      });
+      yield { ...maze.pop() };
     }
   }
 

@@ -1,15 +1,18 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
-import { CreateRoomDto } from '../../../../../../libs/api-interfaces/src/lib/create-room.dto';
+import { CreateRoomDto, GameDto } from '@innoware/api-interfaces';
 import { Observable } from 'rxjs';
-import { GameDto } from '@innoware/api-interfaces';
 
 @Injectable()
 export class RoomService {
   private readonly url = `${environment.api}/game`;
 
   constructor(private http: HttpClient) {
+  }
+
+  availableRooms(): Observable<GameDto[]> {
+    return this.http.get<GameDto[]>(this.url);
   }
 
   create(dto: CreateRoomDto): Observable<GameDto> {

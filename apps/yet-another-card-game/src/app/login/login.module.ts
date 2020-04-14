@@ -8,7 +8,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
-import { DirectivesModule } from '../directives/directives.module';
+import { DirectivesModule } from '../shared/directives/directives.module';
 import { SharedModule } from '../shared/shared.module';
 import { TranslocoRootModule } from '../i18n/transloco-root.module';
 import { RegisterFormComponent } from './components/forms/register/register-form.component';

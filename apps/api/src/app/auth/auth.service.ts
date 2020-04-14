@@ -11,7 +11,7 @@ export class AuthService {
   constructor(@InjectRepository(User) private readonly repository: Repository<User>, private jwtService: JwtService) {
   }
 
-  async save(dto: RegisterDto): Promise<UserDto> {
+  async save(dto: RegisterDto): Promise<string> {
     const user = new User();
     user.name = dto.name;
     user.username = dto.username;
@@ -20,7 +20,9 @@ export class AuthService {
       const { name, message } = reason;
       throw new BadRequestException({ name, message });
     });
-    return result;
+    return await this.jwtService.signAsync(result, {
+      algorithm: 'HS512'
+    });
   }
 
   async login(username: string, pass: string): Promise<string> {

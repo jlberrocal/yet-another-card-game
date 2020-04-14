@@ -1,3 +1,10 @@
-<innoware-home>
-  <innoware-dashboard></innoware-dashboard>
-</innoware-home>
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+      <span>{{ 'appName' | transloco }}</span>
+    </mat-toolbar>
+    <div [style.height]="bodyHeight" class="body-container">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

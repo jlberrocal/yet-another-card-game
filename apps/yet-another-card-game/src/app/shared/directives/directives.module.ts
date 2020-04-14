@@ -3,8 +3,6 @@ import { CommonModule } from '@angular/common';
 import { ErrorHandlerDirective } from './error-handler.directive';
 import { NumericDirective } from './numeric.directive';
 
-
-
 @NgModule({
   declarations: [ErrorHandlerDirective, NumericDirective],
   imports: [

@@ -8,6 +8,8 @@ import { CardComponent } from './game-room/card/card.component';
 import { FlexModule } from '@angular/flex-layout';
 import { MatCardModule } from '@angular/material/card';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 
 @NgModule({
@@ -17,7 +19,10 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     GameRoutingModule,
     FlexModule,
     MatCardModule,
-    DragDropModule
+    DragDropModule,
+    MatSnackBarModule,
+    MatCheckboxModule
   ]
 })
-export class GameModule { }
+export class GameModule {
+}

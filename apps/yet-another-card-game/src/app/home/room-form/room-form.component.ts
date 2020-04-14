@@ -1,6 +1,6 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { CreateRoomDto } from '../../../../../../../libs/api-interfaces/src/lib/create-room.dto';
+import { CreateRoomDto } from '@innoware/api-interfaces';
 
 @Component({
   selector: 'innoware-room-form',
@@ -13,7 +13,7 @@ export class RoomFormComponent {
   label: string;
 
   @Output()
-  createOrJoin = new EventEmitter<CreateRoomDto>();
+  createRoom = new EventEmitter<CreateRoomDto>();
 
   form: FormGroup;
 
@@ -30,6 +30,6 @@ export class RoomFormComponent {
   }
 
   submit() {
-    this.createOrJoin.emit(this.form.value);
+    this.createRoom.emit(this.form.value);
   }
 }

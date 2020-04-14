@@ -1,0 +1,6 @@
+version: 3
+services:
+  ng:
+    image: node:lts-alpine
+    volumes:
+      -

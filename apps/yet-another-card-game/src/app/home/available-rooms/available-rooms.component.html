@@ -1,0 +1,17 @@
+<mat-list *ngIf="rooms$ | async as rooms; else empty">
+  <mat-list-item *ngFor="let room of rooms" (click)="toggleRoom(room, rooms)">
+    <span mat-line>
+      {{room.name}}
+    </span>
+    <div *ngIf="room.details" mat-line @listAnimation>
+      <mat-list-item *ngFor="let player of room.players" mat-line>
+        {{player.name}} ({{player.position ? player.position : ('room.waiting' | transloco)}})
+      </mat-list-item>
+      <button mat-line mat-raised-button color="primary" (click)="join($event, room)">Join Room</button>
+    </div>
+  </mat-list-item>
+</mat-list>
+
+<ng-template #empty>
+  <div>There are no records</div>
+</ng-template>

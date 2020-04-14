@@ -1,22 +1,29 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Req, UseGuards } from '@nestjs/common';
 import { CreateRoomDto } from '@innoware/api-interfaces';
 import { GameService } from './game.service';
 import { GameGateway } from '../sockets/game.gateway';
 import { MazeService } from '../maze/maze.service';
-import { SocketsGateway } from '../sockets/sockets.gateway';
+import { AuthGuard } from '@nestjs/passport';
+import { User } from '../models/user.entity';
+
+export type RequestWithUser = Request & { user: User }
 
 @Controller('game')
-//@UseGuards(AuthGuard('jwt'))
+@UseGuards(AuthGuard('jwt'))
 export class GameController {
   constructor(private readonly gameService: GameService,
               private readonly mazeService: MazeService,
-              private readonly gateway: GameGateway,
-              private rootGateway: SocketsGateway) {
+              private readonly gateway: GameGateway) {
+  }
+
+  @Get('/')
+  getRooms() {
+    return this.gameService.runningGames();
   }
 
   @Post('/create')
-  createRoom(@Body() body: CreateRoomDto) {
-    return this.gameService.save(body);
+  createRoom(@Body() body: CreateRoomDto, @Req() { user }: RequestWithUser) {
+    return this.gameService.save(body, user);
   }
 
   @Get('/deal/:room')

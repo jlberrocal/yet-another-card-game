@@ -11,7 +11,8 @@
     "capacity": {
       "label": "Capacidad de la sala",
       "placeholder": "4"
-    }
+    },
+    "waiting": "Esperando jugadores"
   },
   "create-room": "Crear",
   "join-room": "Unirse",
@@ -22,5 +23,15 @@
     "minlength": "Se espera al menos {{requiredLength}} caractéres",
     "maxlength": "Se espera un máximo de {{requiredLength}} caractéres",
     "passwordMismatch": "Ambas contraseñas deben ser iguales"
+  },
+  "confirmation": {
+    "btns": {
+      "yes": "Sí",
+      "no": "No"
+    },
+    "labels": {
+      "title": "Confirmación",
+      "text": "Realmente quieres acceder al juego {{name}}?"
+    }
   }
 }

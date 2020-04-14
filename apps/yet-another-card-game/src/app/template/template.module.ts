@@ -3,8 +3,6 @@ import { CommonModule } from '@angular/common';
 
 import { TemplateRoutingModule } from './template-routing.module';
 import { TemplateComponent } from './template.component';
-import { DashboardComponent } from '../home/dashboard/dashboard.component';
-import { HomeComponent } from '../home/home.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { TranslocoModule } from '@ngneat/transloco';
@@ -15,16 +13,16 @@ import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FlexModule } from '@angular/flex-layout';
 import { SharedModule } from '../shared/shared.module';
-import { DirectivesModule } from '../directives/directives.module';
+import { DirectivesModule } from '../shared/directives/directives.module';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTabsModule } from '@angular/material/tabs';
-import { RoomFormComponent } from '../home/dashboard/room-form/room-form.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AuthInterceptorService } from '../shared/interceptors/auth.interceptor.service';
+import { MatListModule } from '@angular/material/list';
 
 
 @NgModule({
-  declarations: [TemplateComponent, DashboardComponent, HomeComponent, RoomFormComponent],
+  declarations: [TemplateComponent],
   imports: [
     CommonModule,
     TemplateRoutingModule,
@@ -41,7 +39,8 @@ import { AuthInterceptorService } from '../shared/interceptors/auth.interceptor.
     DirectivesModule,
     MatButtonModule,
     MatTabsModule,
-    HttpClientModule
+    HttpClientModule,
+    MatListModule
   ],
   providers: [
     {

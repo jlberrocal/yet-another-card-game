@@ -20,12 +20,12 @@ import { TranslocoRootModule } from './i18n/transloco-root.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { DirectivesModule } from './directives/directives.module';
+import { DirectivesModule } from './shared/directives/directives.module';
 import { AppRoutingModule } from './app-routing.module';
 import { JwtModule } from '@auth0/angular-jwt';
 
 export function tokenGetter(): string {
-  return localStorage.getItem('token')
+  return localStorage.getItem('token');
 }
 
 @NgModule({
@@ -60,8 +60,6 @@ export function tokenGetter(): string {
     AppRoutingModule
   ],
   providers: [],
-  exports: [
-  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

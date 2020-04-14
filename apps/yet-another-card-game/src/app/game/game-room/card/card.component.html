@@ -1,1 +1,8 @@
-<div class="card-container" [innerHTML]="svg$ | async"></div>
+<mat-card>
+  <mat-card-header fxLayout fxLayoutAlign="end">
+    <mat-checkbox (change)="checkChange($event)"></mat-checkbox>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="card-container" [innerHTML]="svg$ | async"></div>
+  </mat-card-content>
+</mat-card>

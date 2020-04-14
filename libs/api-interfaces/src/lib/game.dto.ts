@@ -6,7 +6,6 @@ export interface GameDto {
   name: string;
   players: Player[];
   started: boolean;
-  order: number;
 }
 
 export interface Player extends UserDto {

@@ -1,3 +1,15 @@
 <div class="cards-list" fxLayout="row wrap" fxLayoutGap="15px" cdkDropList (cdkDropListDropped)="drop($event)" cdkDropListOrientation="horizontal">
-  <innoware-card class="card" *ngFor="let card of cards" [cardType]="card.type" [cardNumber]="card.number" cdkDrag></innoware-card>
+  <innoware-card
+    class="card"
+    *ngFor="let card of cards"
+    [cardType]="card.type"
+    [cardNumber]="card.number"
+    (selected)="cardSelected(card)"
+    cdkDrag>
+
+  </innoware-card>
+
+  <div class="layout-item-drag-preview" *cdkDragPreview>
+    {{ selections.length > 0 ? selections.length : 1 }}
+  </div>
 </div>
