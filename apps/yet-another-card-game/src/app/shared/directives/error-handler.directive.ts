@@ -43,7 +43,7 @@ export class ErrorHandlerDirective implements OnInit, AfterViewInit, OnDestroy {
         .subscribe(() => {
           if (control.invalid && !this.hasView) {
             const errorKey = Object.keys(control.errors)[0];
-            console.log('error', control.errors[errorKey]);
+            console.logResponse('error', control.errors[errorKey]);
             this.viewContainer.createEmbeddedView(this.templateRef, {
               $implicit: this.transloco.translate(`validations.${errorKey}`, control.errors[errorKey])
             });

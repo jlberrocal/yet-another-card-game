@@ -14,9 +14,42 @@ body { font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 
 .innoware-card {
+  width: 75px;
+  height: 125px;
+  &.red {
+    color: #dd4400;
+  }
+
+  .mat-card {
+    padding: 0 !important;
+
+    &-header {
+      margin: -16px 0 0 -25px;
+    }
+
+    &-title {
+      font-size: 16px;
+    }
+
+    &-content h1 {
+      font-size: 96px;
+    }
+  }
+  .mat-card-footer {
+    margin: 0 -10px -16px -16px;
+  }
+}
+
+/*
+.innoware-card {
   padding: 5px;
   height: 92px;
   width: 65px;
+
+  &.handset-landscape {
+    height: 77px;
+    width: 55px;
+  }
 
   .mat-card-avatar {
     height: 10px;
@@ -73,4 +106,4 @@ body { font-family: Roboto, "Helvetica Neue", sans-serif; }
 .number-hearts, .number-diamonds {
   color: #d40000;
 }
-
+*/

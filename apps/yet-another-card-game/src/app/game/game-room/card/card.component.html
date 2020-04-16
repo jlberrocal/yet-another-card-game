@@ -1,20 +1,28 @@
-<mat-card class="innoware-card" *ngIf="!(cardNumber | isJoker); else joker">
+<mat-card class="innoware-card mat-elevation-z8" [ngClass]="{ 'handset-landscape': mini, red: cardType | isRedCard }">
   <mat-card-header fxLayout fxLayoutAlign="space-between">
-    <div mat-card-avatar class="header header-{{cardType | lowercase}}"></div>
-    <mat-card-title class="number-{{cardType | lowercase}}">
-      {{cardNumber}}
+    <mat-card-title class="number-{{cardType | lowercase}}" fxLayout="column" [ngSwitch]="cardType">
+      <span *ngIf="cardType !== types.JOKERS">{{cardNumber}}</span>
+
+      <div [style.fontSize.px]="12" *ngSwitchCase="types.CLUBS">&clubs;</div>
+      <div [style.fontSize.px]="12" *ngSwitchCase="types.DIAMONDS">&diams;</div>
+      <div [style.fontSize.px]="12" *ngSwitchCase="types.HEARTS">&hearts;</div>
+      <div [style.fontSize.px]="12" *ngSwitchCase="types.SPADES">&spades;</div>
     </mat-card-title>
   </mat-card-header>
-  <img mat-card-image src="/assets/images/suits-views.svg#{{cardType | lowercase}}" height="30" width="30"/>
-  <mat-card-footer fxLayout fxLayoutAlign="space-between">
-    <span class="number-{{cardType | lowercase}}">{{cardNumber}}</span>
-    <div mat-card-avatar class="header header-{{cardType | lowercase}}"></div>
+  <mat-card-content [ngClass]="{'joker-card': cardType === types.JOKERS}" [ngSwitch]="cardType" fxLayout fxLayoutAlign="center center">
+    <h1 *ngSwitchCase="types.CLUBS">&clubs;</h1>
+    <h1 *ngSwitchCase="types.DIAMONDS">&diams;</h1>
+    <h1 *ngSwitchCase="types.HEARTS">&hearts;</h1>
+    <h1 *ngSwitchCase="types.SPADES">&spades;</h1>
+    <h2 *ngSwitchCase="types.JOKERS">Joker</h2>
+  </mat-card-content>
+  <mat-card-footer fxLayout fxLayoutAlign="end">
+    <div fxLayout="column" fxLayoutAlign="center" [ngSwitch]="cardType">
+      <div *ngSwitchCase="types.CLUBS">&clubs;</div>
+      <div *ngSwitchCase="types.DIAMONDS">&diams;</div>
+      <div *ngSwitchCase="types.HEARTS">&hearts;</div>
+      <div *ngSwitchCase="types.SPADES">&spades;</div>
+      <span *ngIf="cardType !== types.JOKERS">{{cardNumber}}</span>
+    </div>
   </mat-card-footer>
 </mat-card>
-<ng-template #joker>
-  <mat-card>
-    <mat-card-content style="font-size: 32px">
-      JOKER
-    </mat-card-content>
-  </mat-card>
-</ng-template>

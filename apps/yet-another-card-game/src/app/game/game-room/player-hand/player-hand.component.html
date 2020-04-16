@@ -1,14 +1,18 @@
 <div class="cards-list" fxLayout="row" fxLayoutGap="15px" cdkDropList (cdkDropListDropped)="drop($event)" cdkDropListOrientation="horizontal" [style.maxWidth.px]="750">
   <innoware-card
     class="card"
+    [@hoverState]="card.hover"
     cdkDragBoundary=".cards-list"
-    [style.left.px]="dragging | dynamicOverlap:i"
-    *ngFor="let card of cards; let i = index"
+    [style.left.px]="(card.hover && dragging ? 0 : -80) * index"
+    *ngFor="let card of cards; let index = index"
     [cardType]="card.type"
     [cardNumber]="card.number"
+    [mini]="isHandset$ | async"
     (selected)="cardSelected(card)"
-    (cdkDragStarted)="dragStart($event)"
+    (cdkDragStarted)="dragStart(card)"
     (cdkDragEnded)="dragEnded()"
+    (mouseenter)="hoverOver(card)"
+    (mouseleave)="mouseLeave(card)"
     cdkDrag>
     <!--<div class="layout-item-drag-preview" *cdkDragPreview>
       {{ selections.length > 0 ? selections.length : 1 }}

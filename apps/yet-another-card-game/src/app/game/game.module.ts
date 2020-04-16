@@ -11,11 +11,10 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { IsJokerPipe } from './game-room/card/pipes/is-joker.pipe';
-import { DynamicOverlapPipe } from './game-room/player-hand/pipes/dynamic-overlap.pipe';
-
+import { IsRedCardPipe } from './game-room/card/pipes/is-red-card.pipe';
 
 @NgModule({
-  declarations: [GameRoomComponent, PlayerHandComponent, CardComponent, IsJokerPipe, DynamicOverlapPipe],
+  declarations: [GameRoomComponent, PlayerHandComponent, CardComponent, IsJokerPipe, IsRedCardPipe],
   imports: [
     CommonModule,
     GameRoutingModule,
